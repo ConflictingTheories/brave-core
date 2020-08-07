@@ -38,6 +38,7 @@
 #include "bat/ledger/internal/database/migration/migration_v26.h"
 #include "bat/ledger/internal/database/migration/migration_v27.h"
 #include "bat/ledger/internal/database/migration/migration_v28.h"
+#include "bat/ledger/internal/database/migration/migration_v29.h"
 #include "bat/ledger/internal/ledger_impl.h"
 #include "third_party/re2/src/re2/re2.h"
 
@@ -104,6 +105,7 @@ void DatabaseMigration::Start(
     migration::v26,
     migration::v27,
     migration::v28,
+    migration::v29,
   };
 
   DCHECK_LE(target_version, mappings.size());

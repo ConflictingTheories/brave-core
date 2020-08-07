@@ -8,6 +8,7 @@
 #include "bat/ledger/internal/database/database_initialize.h"
 #include "bat/ledger/internal/database/database_util.h"
 #include "bat/ledger/internal/ledger_impl.h"
+#include "bat/ledger/internal/logging/event_log_keys.h"
 #include "bat/ledger/internal/state/state_keys.h"
 
 using std::placeholders::_1;
@@ -120,7 +121,16 @@ void DatabaseInitialize::OnExecuteCreateScript(
     return;
   }
 
-  migration_->Start(table_version, callback);
+  migration_->Start(
+      table_version,
+      [this, callback](const ledger::Result result) {
+        if (result == ledger::Result::LEDGER_OK) {
+          ledger_->database()->SaveEventLog(
+              ledger::log::kDatabaseMigrated,
+              std::to_string(GetCurrentVersion()));
+        }
+        callback(result);
+      });
 }
 
 }  // namespace braveledger_database

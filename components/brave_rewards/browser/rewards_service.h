@@ -18,6 +18,7 @@
 #include "brave/components/brave_rewards/browser/balance_report.h"
 #include "brave/components/brave_rewards/browser/content_site.h"
 #include "brave/components/brave_rewards/browser/contribution_info.h"
+#include "brave/components/brave_rewards/browser/event_log.h"
 #include "brave/components/brave_rewards/browser/external_wallet.h"
 #include "brave/components/brave_rewards/browser/publisher_banner.h"
 #include "brave/components/brave_rewards/browser/pending_contribution.h"
@@ -127,6 +128,9 @@ using LoadDiagnosticLogCallback = base::OnceCallback<void(const std::string&)>;
 using ClearDiagnosticLogCallback = base::OnceCallback<void(const bool success)>;
 
 using SuccessCallback = base::OnceCallback<void(const bool success)>;
+
+using GetEventLogsCallback =
+    base::OnceCallback<void(const std::vector<brave_rewards::EventLog>&)>;
 
 class RewardsService : public KeyedService {
  public:
@@ -331,6 +335,8 @@ class RewardsService : public KeyedService {
       ClearDiagnosticLogCallback callback) = 0;
 
   virtual void CompleteReset(SuccessCallback callback) = 0;
+
+  virtual void GetEventLogs(GetEventLogsCallback callback) = 0;
 
  protected:
   base::ObserverList<RewardsServiceObserver> observers_;
