@@ -43,6 +43,9 @@ const char kBraveBuildInstructionsUrl[] =
 const char kBraveLicenseUrl[] = "https://mozilla.org/MPL/2.0/";
 const char kBraveReleaseTagPrefix[] =
     "https://github.com/brave/brave-browser/releases/tag/v";
+const char kGoogleLoginLearnMoreURL[] = 
+    "https://github.com/brave/brave-browser/wiki/"
+    "Social-Blocking:-Allow-Google-login";
 
 void BraveAddCommonStrings(content::WebUIDataSource* html_source,
                            Profile* profile) {
@@ -115,6 +118,8 @@ void BraveAddCommonStrings(content::WebUIDataSource* html_source,
       IDS_SETTINGS_BRAVE_SHIELDS_SHOW_STATS_BLOCKED_BADGE_LABEL},
     {"googleLoginControlLabel",
       IDS_SETTINGS_BRAVE_SHIELDS_GOOGLE_LOGIN_LABEL},
+    {"googleLoginControlSubLabel",
+      IDS_SETTINGS_BRAVE_SHIELDS_GOOGLE_LOGIN_SUB_LABEL},
     {"fbEmbedControlLabel",
       IDS_SETTINGS_BRAVE_SHIELDS_FACEBOOK_EMBEDDED_POSTS_LABEL},
     {"twitterEmbedControlLabel",
@@ -297,6 +302,8 @@ void BraveAddCommonStrings(content::WebUIDataSource* html_source,
       IDS_CONTEXT_MENU_SHOW_FULL_URLS},
   };
   AddLocalizedStringsBulk(html_source, localized_strings);
+  html_source->AddString("googleLoginLearnMoreURL",
+                        base::ASCIIToUTF16(kGoogleLoginLearnMoreURL));
   html_source->AddString("webRTCLearnMoreURL",
                          base::ASCIIToUTF16(kWebRTCLearnMoreURL));
   html_source->AddString(
